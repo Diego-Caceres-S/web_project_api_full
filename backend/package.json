@@ -1,0 +1,42 @@
+{
+  "name": "web_project_around_express",
+  "version": "1.0.0",
+  "description": "API REST del proyecto 'Around' construida con Express, que gestiona usuarios y tarjetas.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diego-Caceres-S/web_project_around_express.git"
+  },
+  "keywords": [],
+  "author": "Diego",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Diego-Caceres-S/web_project_around_express/issues"
+  },
+  "homepage": "https://github.com/Diego-Caceres-S/web_project_around_express#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.8.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "validator": "^13.11.0",
+    "celebrate": "^15.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "winston": "^3.13.0",
+    "express-winston": "^4.2.0"
+  }
+}
