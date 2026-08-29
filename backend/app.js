@@ -22,7 +22,6 @@ const app = express();
 mongoose.connect(MONGO_URL);
 
 app.use(cors());
-app.options("*", cors());
 
 app.use(express.json());
 

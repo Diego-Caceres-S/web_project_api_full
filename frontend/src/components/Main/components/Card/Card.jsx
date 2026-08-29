@@ -5,7 +5,7 @@ import RemoveCard from "../Popup/RemoveCard/RemoveCard";
 
 export default function Card(props) {
   const { card, handleOpenPopup, onCardLike, onCardDelete } = props;
-  const { name, link, isLiked } = card;
+  const { name, link, likes } = card;
   const { currentUser } = useContext(CurrentUserContext);
 
   const currentUserId = currentUser?._id ?? currentUser?.id;
@@ -14,7 +14,10 @@ export default function Card(props) {
     currentUserId != null &&
     ownerId != null &&
     String(ownerId) === String(currentUserId);
-
+  const isLiked =
+    Array.isArray(likes) &&
+    currentUserId != null &&
+    likes.some((id) => String(id?._id ?? id) === String(currentUserId));
   const cardLikeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_is-active" : ""
   }`;

@@ -89,7 +89,8 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.isLiked;
+    const currentUserId = currentUser?._id;
+    const isLiked = card.likes?.includes(currentUserId);
     const likeMethod = isLiked
       ? api.unlikeCard(card._id)
       : api.likeCard(card._id);
