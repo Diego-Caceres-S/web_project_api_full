@@ -1,12 +1,12 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const BadRequestError = require("../errors/BadRequestError");
-const UnauthorizedError = require("../errors/UnauthorizedError");
-const NotFoundError = require("../errors/NotFoundError");
-const ConflictError = require("../errors/ConflictError");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const BadRequestError = require('../errors/BadRequestError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const NotFoundError = require('../errors/NotFoundError');
+const ConflictError = require('../errors/ConflictError');
 
-const { JWT_SECRET = "dev-secret-key-not-for-production" } = process.env;
+const { JWT_SECRET = 'dev-secret-key-not-for-production' } = process.env;
 const SALT_ROUNDS = 10;
 
 module.exports.getUsers = (req, res, next) => {
@@ -20,13 +20,13 @@ module.exports.getUserById = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("Usuario no encontrado");
+        throw new NotFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === "CastError") {
-        return next(new BadRequestError("ID de usuario inválido"));
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('ID de usuario inválido'));
       }
       return next(err);
     });
@@ -36,7 +36,7 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("Usuario no encontrado");
+        throw new NotFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
@@ -61,10 +61,10 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         return next(
-          new ConflictError("Ya existe un usuario con este correo electrónico"),
+          new ConflictError('Ya existe un usuario con este correo electrónico'),
         );
       }
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         return next(new BadRequestError(err.message));
       }
       return next(err);
@@ -75,17 +75,17 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email })
-    .select("+password")
+    .select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError("Correo o contraseña incorrectos");
+        throw new UnauthorizedError('Correo o contraseña incorrectos');
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          throw new UnauthorizedError("Correo o contraseña incorrectos");
+          throw new UnauthorizedError('Correo o contraseña incorrectos');
         }
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-          expiresIn: "7d",
+          expiresIn: '7d',
         });
         res.send({ token });
       });
@@ -102,13 +102,13 @@ module.exports.updateProfile = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("Usuario no encontrado");
+        throw new NotFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === "ValidationError") {
-        return next(new BadRequestError("Datos inválidos para actualizar el perfil"));
+      if (err.name === 'ValidationError') {
+        return next(new BadRequestError('Datos inválidos para actualizar el perfil'));
       }
       return next(err);
     });
@@ -123,13 +123,13 @@ module.exports.updateAvatar = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("Usuario no encontrado");
+        throw new NotFoundError('Usuario no encontrado');
       }
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === "ValidationError") {
-        return next(new BadRequestError("Datos inválidos para actualizar el avatar"));
+      if (err.name === 'ValidationError') {
+        return next(new BadRequestError('Datos inválidos para actualizar el avatar'));
       }
       return next(err);
     });

@@ -1,19 +1,19 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
-const { URL_REGEX } = require("../utils/constants");
+const mongoose = require('mongoose');
+const validator = require('validator');
+const { URL_REGEX } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: "Jacques Cousteau",
+    default: 'Jacques Cousteau',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: "Explorador",
+    default: 'Explorador',
   },
   avatar: {
     type: String,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
       validator: (v) => URL_REGEX.test(v),
     },
     default:
-      "https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg",
+      'https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg',
   },
   email: {
     type: String,
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: (v) => validator.isEmail(v),
-      message: "El correo electrónico no es válido",
+      message: 'El correo electrónico no es válido',
     },
   },
   password: {
@@ -39,4 +39,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model('user', userSchema);

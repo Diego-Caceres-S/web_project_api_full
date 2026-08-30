@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { URL_REGEX } = require("../utils/constants");
+const mongoose = require('mongoose');
+const { URL_REGEX } = require('../utils/constants');
 
 const card = new mongoose.Schema({
   name: {
@@ -12,19 +12,19 @@ const card = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: function (v) {
+      validator(v) {
         return URL_REGEX.test(v);
       },
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: 'user',
     required: true,
   },
   likes: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "user",
+    ref: 'user',
     default: [],
   },
   createdAt: {
@@ -33,4 +33,4 @@ const card = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("card", card);
+module.exports = mongoose.model('card', card);

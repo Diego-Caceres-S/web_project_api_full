@@ -1,7 +1,7 @@
-const Card = require("../models/card");
-const BadRequestError = require("../errors/BadRequestError");
-const NotFoundError = require("../errors/NotFoundError");
-const ForbiddenError = require("../errors/ForbiddenError");
+const Card = require('../models/card');
+const BadRequestError = require('../errors/BadRequestError');
+const NotFoundError = require('../errors/NotFoundError');
+const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
@@ -14,7 +14,7 @@ module.exports.createCard = (req, res, next) => {
   Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(201).send(card))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         return next(new BadRequestError(err.message));
       }
       return next(err);
@@ -27,16 +27,16 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(cardId)
     .then((card) => {
       if (!card) {
-        throw new NotFoundError("Tarjeta no encontrada");
+        throw new NotFoundError('Tarjeta no encontrada');
       }
       if (card.owner.toString() !== req.user._id) {
-        throw new ForbiddenError("No puedes eliminar la tarjeta de otro usuario");
+        throw new ForbiddenError('No puedes eliminar la tarjeta de otro usuario');
       }
       return card.deleteOne().then(() => res.send(card));
     })
     .catch((err) => {
-      if (err.name === "CastError") {
-        return next(new BadRequestError("ID de tarjeta inválido"));
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('ID de tarjeta inválido'));
       }
       return next(err);
     });
@@ -50,13 +50,13 @@ module.exports.likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new NotFoundError("Tarjeta no encontrada");
+        throw new NotFoundError('Tarjeta no encontrada');
       }
       res.send(card);
     })
     .catch((err) => {
-      if (err.name === "CastError") {
-        return next(new BadRequestError("ID de tarjeta inválido"));
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('ID de tarjeta inválido'));
       }
       return next(err);
     });
@@ -70,13 +70,13 @@ module.exports.dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        throw new NotFoundError("Tarjeta no encontrada");
+        throw new NotFoundError('Tarjeta no encontrada');
       }
       res.send(card);
     })
     .catch((err) => {
-      if (err.name === "CastError") {
-        return next(new BadRequestError("ID de tarjeta inválido"));
+      if (err.name === 'CastError') {
+        return next(new BadRequestError('ID de tarjeta inválido'));
       }
       return next(err);
     });
