@@ -1,8 +1,10 @@
-# Tripleten web_project_api_full
-
 # Around The U.S.
 
 Around The U.S. es una red social de fotografías de viajes. Los usuarios pueden registrarse, iniciar sesión, editar su perfil y avatar, agregar tarjetas con fotos de lugares, darles "me gusta" y eliminarlas.
+
+## URL de la aplicación
+
+**https://around-diego.mooo.com**
 
 ## Descripción del proyecto y funcionalidad
 
@@ -24,6 +26,14 @@ Este proyecto está dividido en dos partes que viven en el mismo repositorio:
 - Validación de todos los datos que llegan al servidor.
 - Manejo centralizado de errores, con códigos de estado HTTP apropiados (400, 401, 403, 404, 409, 500).
 - Registro de solicitudes y errores en archivos de log.
+
+## Capturas de pantalla
+
+_(agrega aquí tus capturas o GIFs mostrando el registro, login, perfil y tarjetas)_
+
+## Video de demostración
+
+_(agrega aquí el link al video, si lo grabas)_
 
 ## Tecnologías y técnicas utilizadas
 
@@ -47,11 +57,22 @@ Este proyecto está dividido en dos partes que viven en el mismo repositorio:
 - CORS habilitado para conectar con el frontend
 - Manejo centralizado de errores con clases de error personalizadas
 
+### Infraestructura / despliegue
+
+- Servidor en la nube: Google Cloud (Compute Engine, Ubuntu)
+- Nginx como servidor web y proxy inverso (sirve el frontend y redirige `/api/` al backend)
+- PM2 como gestor de procesos (mantiene el backend corriendo, incluso tras reinicios del servidor)
+- Dominio gratuito vía FreeDNS
+- Certificado HTTPS emitido con Let's Encrypt (Certbot)
+
 ## Estructura del repositorio
 
-├── backend/ API REST (Node.js/Express)
-├── frontend/ Interfaz de usuario (React)
+```
+.
+├── backend/       API REST (Node.js/Express)
+├── frontend/      Interfaz de usuario (React)
 └── README.md
+```
 
 ## Cómo correr el proyecto localmente
 
@@ -96,9 +117,9 @@ Abre la dirección que te indique la terminal (normalmente `http://localhost:517
 
 ### Frontend (`frontend/.env`, opcional)
 
-| Variable       | Descripción                                                              |
-| -------------- | ------------------------------------------------------------------------ |
-| `VITE_API_URL` | URL base del backend (por defecto `http://localhost:3000` en desarrollo) |
+| Variable       | Descripción                                                                        |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `VITE_API_URL` | URL base del backend (`/api` en producción, `http://localhost:3000` en desarrollo) |
 
 ## Endpoints principales de la API
 
@@ -117,4 +138,4 @@ Abre la dirección que te indique la terminal (normalmente `http://localhost:517
 
 ## Autor
 
-Diego Cáceres S.
+Diego Cáceres
