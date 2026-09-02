@@ -13,7 +13,7 @@ export default function EditProfile() {
       {},
       true,
     );
-  }, [currentUser]);
+  }, [currentUser, resetForm]);
 
   function handleSubmit(e) {
     e.preventDefault();

@@ -40,7 +40,7 @@ function App() {
         console.error(error);
         localStorage.removeItem("jwt");
       });
-  }, []);
+  }, [navigate]);
   useEffect(() => {
     if (!loggedIn) return;
 
